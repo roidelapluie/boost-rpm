@@ -36,7 +36,7 @@ Name: boost
 Summary: The free peer-reviewed portable C++ source libraries
 Version: 1.55.0
 %define version_enc 1_55_0
-Release: 4%{?dist}
+Release: 6%{?dist}
 License: Boost and MIT and Python
 
 %define toplev_dirname %{name}_%{version_enc}
@@ -99,6 +99,7 @@ Patch5: boost-1.48.0-add-bjam-man-page.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=828856
 # https://bugzilla.redhat.com/show_bug.cgi?id=828857
+# https://svn.boost.org/trac/boost/ticket/6701
 Patch15: boost-1.50.0-pool.patch
 
 # https://svn.boost.org/trac/boost/ticket/8844
@@ -159,6 +160,10 @@ Patch57: boost-1.55.0-spirit-unused_typedefs.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1159960
 Patch58: boost-1.54.0-smart_ptr-shared_ptr_at.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1177066
+Patch59: boost-1.55.0-atomic-int128_1.patch
+Patch60: boost-1.55.0-atomic-int128_2.patch
 
 %bcond_with tests
 %bcond_with docs_generated
@@ -647,6 +652,8 @@ a number of significant features and is now developed independently
 %patch56 -p1
 %patch57 -p1
 %patch58 -p1
+%patch59 -p2
+%patch60 -p2
 
 # At least python2_version needs to be a macro so that it's visible in
 # %%install as well.
@@ -1249,6 +1256,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/bjam.1*
 
 %changelog
+* Fri Jan  2 2015 Petr Machata <pmachata@redhat.com> - 1.55.0-6
+- Boost.Atomic: Fixed incorrect initialization of 128-bit values, when
+  no native support for 128-bit integers is available.
+  (boost-1.55.0-atomic-int128_1.patch,
+  boost-1.55.0-atomic-int128_2.patch)
+
 * Wed Nov 12 2014 Petr Machata <pmachata@redhat.com> - 1.55.0-4
 - Fix boost::shared_ptr<T>::operator[], which was ill-formed for
   non-array T's.  (boost-1.54.0-smart_ptr-shared_ptr_at.patch)
