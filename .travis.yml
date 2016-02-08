@@ -1,0 +1,17 @@
+sudo: required
+services:
+- docker
+script:
+- mkdir artifacts
+- docker build -t cfgmgmtsig/travis .
+- docker run -v $PWD/artifacts:/artifacts -t cfgmgmtsig/travis mv /home/bob/rpmbuild/RPMS /artifacts
+- sudo chown -R "$USER:" $PWD/artifacts
+deploy:
+  provider: releases
+  api_key:
+    secure: 
+  skip_cleanup: true
+  file_glob: true
+  file: artifacts/RPMS/*/*.rpm
+  on:
+    tags: true
