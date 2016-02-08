@@ -19,6 +19,6 @@ RUN yum-builddep -y /workspace/boost.spec
 
 RUN chown -R bob: /home/bob /workspace
 
-RUN su - bob -c "rpmbuild -ba /workspace/boost.spec"
+RUN su - bob -c "rpmbuild -ba /workspace/boost.spec --without python3 "
 
 VOLUME /artifacts
