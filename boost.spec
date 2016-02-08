@@ -81,6 +81,7 @@ Requires: boost-timer = %{version}-%{release}
 Requires: boost-wave = %{version}-%{release}
 
 BuildRequires: m4
+BuildRequires: gcc-c++
 BuildRequires: libstdc++-devel%{?_isa}
 BuildRequires: bzip2-devel%{?_isa}
 BuildRequires: zlib-devel%{?_isa}
