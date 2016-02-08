@@ -15,7 +15,7 @@ RUN find /workspace/ -maxdepth 1 -type f -exec cp -v '{}' /home/bob/rpmbuild/SOU
 
 
 RUN spectool -C /home/bob/rpmbuild/SOURCES -g /workspace/boost.spec
-RUN yum-builddep -y /workspace/boost.spec || true
+RUN yum-builddep -y /workspace/boost.spec -t
 
 RUN chown -R bob: /home/bob /workspace
 
