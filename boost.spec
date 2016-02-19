@@ -30,7 +30,11 @@
   %bcond_without context
 %endif
 
-%bcond_without python3
+%if 0%{?fedora}
+  %bcond_without python3
+%else
+  %bcond_with python3
+%endif
 
 Name: boost
 Summary: The free peer-reviewed portable C++ source libraries

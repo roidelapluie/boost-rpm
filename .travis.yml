@@ -2,16 +2,7 @@ sudo: required
 services:
 - docker
 script:
-- mkdir artifacts
-- docker build -t cfgmgmtsig/travis .
-- docker run -v $PWD/artifacts:/artifacts -t cfgmgmtsig/travis mv /home/bob/rpmbuild/RPMS /artifacts
-- sudo chown -R "$USER:" $PWD/artifacts
-deploy:
-  provider: releases
-  api_key:
-    secure: g89ayEpHyaNd/b6xtPANlyNkpLrdyP+b2DWfIzndA4Q7sSI/11dhUJmBjtR+c92P6nktolvYEJshc833Kcohfdg0B0WGMrfayAx+uYE627oas696Z7V51bAZ/25GlmyGxNiwwr2XI5g1fuq4SF1MCyXXheCQ1CERDV/BPIfBlWkbBLAfJjD2uH8vYZJGlcEqWX9yEfKAw5lHJO3mygLleq7n7YziXAKtBq06MjaBRHU0ad5jjEbfZrdRwNNNvyGSKrFkUhaEZUpMnU9fmDH3Enj5g/Uu51CL8BtLBnyYs3QwEXt81zSeEh5Mwsk/5bv798b5ItzflQWSTl1ibfPBqmMtdgAI5mm1ujZNvsYx56jnrF7J3zqMBS9xDFW6JE/ugIyh9O6D7ySLYojZXFvVvNfwN8Bd37my6dgNuHNpFeGVxCw++Z8MtHDyL3FjajUFeJNLzR3XP0qvI1mpxanNIBI7+gqceAOE6YrvcoWfQRaxwjZ3nsSzRIFj1c3tIICcihffJTQVNvbPXa3IGl1JV6xKX4OcNYElFcESky7oTBoCHBxIPZmOhgJFMKiS9iKe6uLaikYWB8I93+BTB46ZoaKYLoZN8RSGJEFaSTj48fYKfL0uZ39z54wWiMcwkG8TtA8UPSQ00EuD3aXc4eShEBbO2yzd7I+WkrfWzQG5OKc=
-  skip_cleanup: true
-  file_glob: true
-  file: artifacts/RPMS/*/*.rpm
-  on:
-    tags: true
+- make
+before_install:
+- openssl aes-256-cbc -K $encrypted_2ec4d63b6867_key -iv $encrypted_2ec4d63b6867_iv
+  -in copr-config.enc -out copr-config -d
