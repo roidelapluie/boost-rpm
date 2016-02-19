@@ -26,7 +26,11 @@
   %bcond_without context
 %endif
 
-%bcond_without python3
+%if 0%{?rhel}
+  %bcond_with python3
+%else
+  %bcond_without python3
+%endif
 
 %ifnarch %{ix86} x86_64
   %bcond_with quadmath
