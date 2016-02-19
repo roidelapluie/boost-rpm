@@ -16,4 +16,4 @@ chown -R bob: /home/bob
 
 su - bob -c "rpmbuild -bs /work/boost.spec"
 
-copr-cli --config ./copr-config build boost /home/bob/rpmbuild/SRPMS/*.srpm
+copr-cli --config ./copr-config build boost /home/bob/rpmbuild/SRPMS/*.src.rpm
